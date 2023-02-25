@@ -1,5 +1,5 @@
 # Xray-TLS+Web build/management script
-# ترجمه این اسکریپت هنوز به اتمام نرسیده و درحال انجام است
+# ترجمه این اسکریپت هنوز به اتمام نرسیده و درحال انجام است...
 ## Table of contents
 [1. Scripting Properties](#Scripting-Properties)
 
