@@ -1,61 +1,61 @@
-# Xray-TLS+Web搭建/管理脚本
-## 目录
-[1. 脚本特性](#脚本特性)
+# Xray-TLS+Web build/management script
+## Table of contents
+[1. Scripting Properties](#Scripting Properties)
 
-[2. 注意事项](#注意事项)
+[2. Precautions](#Precautions)
 
-[3. 安装时长说明](#安装时长说明)
+[3. Installation time description](#Installation time description)
 
-[4. 脚本使用说明](#脚本使用说明)
+[4. Script instructions](#Script instructions)
 
-[5. 运行截图](#运行截图)
+[5. run screenshot](#run screenshot)
 
-[6. 伪装网站说明](#伪装网站说明)
+[6. Fake website description](#Fake website description)
 
-[7. 关于TLS握手、TLS指纹和ALPN](#关于tls握手tls指纹和alpn)
+[7. About TLS handshake, TLS fingerprint and ALPN](#About tls handshake tls fingerprint and alpn)
 
-[8. 关于gRPC与WebSocket](#关于gRPC与WebSocket)
+[8. About gRPC and WebSocket](#About gRPC and WebSocket)
 
-[9. 安装位置](#安装位置)
+[9. installation location](#installation location)
 
-[10. 依赖列表](#依赖列表)
+[10. dependency list](#dependency list)
 
-[11. 注](#注)
-## 脚本特性
-1. 支持 (VLESS/VMess)-(TCP/gRPC/WebSocket)-(XTLS/TLS) + Web 的搭建/管理，支持多种协议并存
+[11. Note](#Note)
+## Scripting Properties
+1. support (VLESS/VMess)-(TCP/gRPC/WebSocket)-(XTLS/TLS) + Web construction/management, supporting the coexistence of multiple protocols
 
-2. 集成 多版本bbr/锐速 安装选项
+2. Integrated multi-version bbr/sharp installation options
  
-3. 支持多种系统 (Ubuntu CentOS Debian deepin fedora ...) 
+3. Support multiple systems (Ubuntu CentOS Debian deepin fedora ...) 
 
-4. 支持多种指令集 (x86 x86_64 arm64 ...)
+4. Support multiple instruction sets (x86 x86_64 arm64 ...)
 
-5. 支持ipv6only服务器 (需自行设置dns64)
+5. Support ipv6only server (need to set dns64 by yourself)
 
-6. 集成删除阿里云盾和腾讯云盾功能 (仅对阿里云和腾讯云服务器有效)
+6. Integrated deletion of Alibaba Cloud Shield and Tencent Cloud Shield functions (only valid for Alibaba Cloud and Tencent Cloud servers)
 
-7. 使用Nginx作为网站服务
+7. Use Nginx as a website service
 
-8. 使用Xray作为前置分流器
+8. Use Xray as a pre-splitter
 
 9. 使用acme.sh自动申请/更新域名证书
 
-10. 支持选择搭建个人网盘作为伪装网页
-## 注意事项
-1. 此脚本需要一个解析到服务器的域名 (支持cdn)
+10. Support the option to build a personal network disk as a camouflaged web page
+## Precautions
+1. This script requires a domain name that resolves to the server (supports cdn)
 
-2. 此脚本安装时间较长，见 **[安装时长说明](#安装时长说明)**
+2. This script takes a long time to install, see **[Installation time description](#Installation time description)**
 
-3. 此脚本设计为个人VPS用户使用，不适合机场主使用 (此脚本没有多用户管理/流量统计等功能)。
+3. This script is designed for personal VPS users, not for airport owners (This script does not have functions such as multi-user management/traffic statistics).
 
-4. 建议在纯净的系统上使用此脚本 (VPS控制台-重置系统)
-## 安装时长说明
-此脚本的安装时间比较长 (**[安装时长参考](#安装时长参考)**) ，原因见[这里](#为什么脚本安装时间那么长)。
+4. It is recommended to use this script on a clean system (VPS console - reset system)
+## Installation time description
+This script takes a long time to install (**[Installation time reference](#Installation time reference)**) ，See[Here](#Why does the script take so long to install)。
 
-此脚本适合安装一次后长期使用，不适合反复重置系统安装，这会消耗您的大量时间。如果需要更换配置和域名等，在管理界面都有相应的选项。
+This script is suitable for long-term use after one installation, and is not suitable for repeatedly resetting the system installation, which will consume a lot of your time. If you need to change the configuration and domain name, etc., there are corresponding options in the management interface.
 
 如果有快速安装的需求，推荐在 **[Xray-core#Installation](https://github.com/XTLS/Xray-core#Installation)** 中选择其他脚本
-### 安装时长参考
+### Installation time reference
 安装流程：
 
 `[升级系统组件]->[安装bbr]->[安装php]->安装Nginx->安装Xray->申请证书->配置文件->[配置伪装网站]`
@@ -77,7 +77,7 @@
 |配置文件|<100毫秒|
 |配置伪装网站|Nextcloud:1-3分钟|
 ||Cloudreve:1-2分钟|
-### 为什么脚本安装时间那么长？
+### Why does the script take so long to install？
 之所以时间相比别的脚本长，有三个原因：
 ```
 1.集成了安装bbr的功能
@@ -95,7 +95,7 @@
 2.软件版本新 (可以对比本脚本与其他脚本Nginx的版本)
 ```
 缺点就是编译耗时长
-## 脚本使用说明
+## Script instructions
 ### 1. 安装wget && ca-certificates
 Debian基系统(包括Ubuntu、Debian、deepin)：
 ```bash
@@ -114,7 +114,7 @@ wget -O Xray-TLS+Web-setup.sh https://github.com/kirin10000/Xray-script/raw/main
 bash Xray-TLS+Web-setup.sh
 ```
 ### 4. 根据脚本提示完成安装
-## 运行截图
+## run screenshot
 <div>
     <img width="400" src="https://github.com/kirin10000/Xray-script/blob/main/image/menu.jpg">
 </div>
@@ -122,7 +122,7 @@ bash Xray-TLS+Web-setup.sh
     <img width="600" src="https://github.com/kirin10000/Xray-script/blob/main/image/protocol.jpg">
 </div>
 
-## 伪装网站说明
+## Fake website description
 ### 伪装网站的作用
 这个网站是用你的域名搭建的一个网站，搭建完成后可以直接在浏览器上输入你的域名访问。
 
@@ -134,7 +134,7 @@ bash Xray-TLS+Web-setup.sh
 
 * **单点性** 指使用的人少，一般只有自己，即使分享给朋友，一般也不会太多。
 * **长时间性** 不单指时间长，也指坚持一个月或一年每天都使用代理。
-* **GO-TLS指纹特性** **在不伪装浏览器指纹的前提下**，从TLS握手信息中可以判断出客户端是GO程序，详见[此处](#关于tls握手tls指纹和alpn)。
+* **GO-TLS指纹特性** **在不伪装浏览器指纹的前提下**，从TLS握手信息中可以判断出客户端是GO程序，详见[此处](#About tls handshake tls fingerprint and alpn)。
 * **出入相同性** 指入VPS和出VPS的流量在时间和大小上几乎相同，比如使用Xray代理浏览`BiliBili`，从`BiliBili`到`VPS(Xray服务端)`的流量，和从`VPS`到`Xray客户端`的流量在时间上和大小上是几乎相同的。**出入相同性** 是所有代理的通病，目前还没有太好的伪装方法，但是因为VPS不在大陆，如果不是被特别关注的对象，一般不会被审查。
 
 既然使用Xray进行代理的全部流量都将伪装成访问这个网站的流量，那么我们选择伪装网站就是要尽量选择**流量特征与Xray代理的流量特征相同的网站**。
@@ -145,12 +145,12 @@ bash Xray-TLS+Web-setup.sh
 
 个人网盘与上面所说特征的吻合数最多，包括 **单点性** 、 **大流量性** 、 **GO-TLS指纹特性** 、 **长时间性** 等，建议选择。
 
-关于**GO-TLS指纹特性**，**在不伪装浏览器指纹的前提下**，将alpn设置为http/1.1，可以伪装成GO语言实现的WebDav客户端，详见[此处](#关于tls握手tls指纹和alpn)。
+关于**GO-TLS指纹特性**，**在不伪装浏览器指纹的前提下**，将alpn设置为http/1.1，可以伪装成GO语言实现的WebDav客户端，详见[此处](#About tls handshake tls fingerprint and alpn)。
 
 Cloudreve 与 Nextcloud 的区别如下：
 ||优点|缺点|
 |-|-|-|
-|Nextcloud|功能更多更强大，用的人更多|需要安装php，安装php需要额外很多时间(见 **[安装时长参考](#安装时长参考)**)，同时也比Cloudreve占用更多系统资源，因此不建议小机使用。|
+|Nextcloud|功能更多更强大，用的人更多|需要安装php，安装php需要额外很多时间(见 **[Installation time reference](#Installation time reference)**)，同时也比Cloudreve占用更多系统资源，因此不建议小机使用。|
 |Cloudreve|轻量化、安装快(不需要php)、占用系统资源少|功能较少，使用的人较少|
 2. **403页面**
 
@@ -165,7 +165,7 @@ Cloudreve 与 Nextcloud 的区别如下：
 4. **自定义反向代理网站**
 
 不建议选择，因为反向代理往往只是反向代理几个html和js文件，网站里面的大部分内容依然是网站后台提供的。不符合大流量特点。
-## 关于TLS握手、TLS指纹和ALPN
+## About TLS handshake, TLS fingerprint and ALPN
 虽然TLS是一项加密技术，但在TLS握手的过程中会有一些明文的信息传输，其中包括SNI信息(由serverName参数指定)、ALPN、加密套件等。
 
 目前TLS的标准中并没有对这些明文做严格的要求，所以在不同的TLS实现下这些明文信息的格式可谓五花八门，这些不同TLS实现所具有的不同的明文特征就是TLS指纹。
@@ -177,15 +177,15 @@ Xray默认使用的是GO语言官方提供的TLS库，这也是几乎所有GO语
 当使用TCP且不伪装浏览器指纹时，可以自由指定义ALPN。建议设置为http/1.1，这样可以将Xray客户端伪装成GO语言实现的WebDav客户端(如 **[gowebdav](https://github.com/studio-b12/gowebdav)**)。WebDav是网盘特有的协议，且该协议基于HTTP/1.1，详见： **[WebDav](https://en.wikipedia.org/wiki/WebDAV)** 。
 
 若选择伪装浏览器指纹，客户端配置中的alpn参数失效，且ALPN将被固定为h2,http/1.1。同样，当使用WebSocket时，ALPN将被固定为http/1.1；当使用gRPC时，ALPN将被强制添加h2。因此，使用WebSocket还是可以伪装成GO语言WebDav客户端的，gRPC则不行。
-## 关于gRPC与WebSocket
+## About gRPC and WebSocket
 当正在使用的CDN同时支持gRPC与WebSocket时，两者之间改如何选择呢？他们的主要区别体现在以下三个方面：ALPN、延迟和性能。
 
-关于ALPN，见[此处](#关于tls握手tls指纹和alpn)。
+关于ALPN，见[此处](#About tls handshake tls fingerprint and alpn)。
 
 关于延迟，gRPC自带mux，因此延迟更低。注意这里指的是打开网站的延迟，mux并不能降低游戏延迟。
 
 关于性能，WebSocket的性能更强，如果你的设备性能较弱的话，如家用普通路由器，用WebSocket速度会快一些。
-## 安装位置
+## installation location
 **Nginx：**`/usr/local/nginx`
 
 **php：**`/usr/local/php`
@@ -193,7 +193,7 @@ Xray默认使用的是GO语言官方提供的TLS库，这也是几乎所有GO语
 **Cloudreve：**`/usr/local/cloudreve`
 
 **Xray：** 见 **[Xray-install](https://github.com/XTLS/Xray-install)**
-## 依赖列表
+## dependency list
 脚本可能自动安装以下依赖：
 |用途|Debian基系统|Red Hat基系统|
 |-|-|-|
@@ -287,7 +287,7 @@ Xray默认使用的是GO语言官方提供的TLS库，这也是几乎所有GO语
 ||autoconf|autoconf|
 ||git|git|
 ||libmagickwand-dev|ImageMagick-devel|
-## 注
+## Note
 1.本文链接(官网)：https://github.com/kirin10000/Xray-script
 
 2.参考教程：https://www.v2fly.org/config/overview.html https://guide.v2fly.org/ https://docs.nextcloud.com/server/latest/admin_manual/installation/source_installation.html https://docs.cloudreve.org/
