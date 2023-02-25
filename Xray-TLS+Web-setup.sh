@@ -1,24 +1,24 @@
 #!/bin/bash
 
-#系统信息
-# 指令集
+#system message
+# Instruction Set
 unset machine
-# 系统
+# system
 unset release
-# 系统版本
+# system version
 unset systemVersion
 unset apt
 unset apt_no_install_recommends
 unset dnf
 unset dnf_no_install_recommends
-# CPU线程数
+# number of CPU threads
 unset cpu_thread_num
-# 系统时区
+# system time zone
 unset timezone
 # ssh service name
 unset ssh_service
 
-#安装配置信息
+#Installation configuration information
 nginx_version="nginx-1.23.3"
 openssl_version="openssl-openssl-3.0.8"
 nginx_prefix="/usr/local/nginx"
@@ -44,49 +44,49 @@ unset xray_is_installed
 temp_dir="/temp_install_update_xray_tls_web"
 unset is_installed
 
-#连接配置信息
-# 域名列表 两个列表用来区别 www.主域名
+#Connection configuration information
+# Domain List Two lists are used to distinguish www.primary domains
 unset domain_list
 unset true_domain_list
 unset domain_config_list
-# 域名伪装列表，对应域名列表
+# Domain name masquerading list, corresponding domain name list
 unset pretend_list
 
-# TCP配置，0代表禁用，1代表XTLS，2代表TLS，3代表XTLS+TLS
+# TCP configuration, 0 means disable, 1 means XTLS, 2 means TLS, 3 means XTLS+TLS
 unset protocol_1
-# grpc使用的代理协议，0代表禁用，1代表VLESS，2代表VMess
+# Proxy protocol used by grpc, 0 means disabled, 1 means VLESS, 2 means VMess
 unset protocol_2
-# WebSocket使用的代理协议，0代表禁用，1代表VLESS，2代表VMess
+# Proxy protocol used by WebSocket, 0 means disabled, 1 means VLESS, 2 means VMess
 unset protocol_3
-# grpc的serviceName
+# serviceName of grpc
 unset serviceName
-# ws的path
+# path of ws
 unset path
-# TCP协议的vless uuid
+# The vless uuid of the TCP protocol
 unset xid_1
-# grpc协议的vless/vmess uuid
+# vless/vmess uuid of grpc protocol
 unset xid_2
-# ws协议的vless/vmess uuid
+# vless/vmess uuid of ws protocol
 unset xid_3
 
-# 现在有没有通过脚本启动swap
+# Is there any way to start swap through the script now?
 using_swap_now=0
-# 在更新
+# updating
 unset update
-# 在 install_update_xray_tls_web 函数中
+# In the install_update_xray_tls_web function
 in_install_update_xray_tls_web=0
 
-#功能性函数：
-#定义几个颜色
-purple()                           #基佬紫
+#functional function：
+#define several colors
+purple()                           #gay purple
 {
     echo -e "\\033[35;1m${*}\\033[0m"
 }
-tyblue()                           #天依蓝
+tyblue()                           #Sky Yilan
 {
     echo -e "\\033[36;1m${*}\\033[0m"
 }
-green()                            #原谅绿
+green()                            #forgive green
 {
     echo -e "\\033[32;1m${*}\\033[0m"
 }
@@ -111,8 +111,8 @@ check_base_command()
     for i in "${temp_command_list[@]}"
     do
         if ! command -V "${i}" > /dev/null; then
-            red "命令\"${i}\"未找到"
-            red "不是标准的Linux系统"
+            red "Order\"${i}\"not found"
+            red "Not a standard Linux system"
             exit 1
         fi
     done
@@ -148,34 +148,34 @@ check_script_update()
 update_script()
 {
     if wget -O "${BASH_SOURCE[0]}" "https://github.com/kirin10000/Xray-script/raw/main/Xray-TLS+Web-setup.sh" || wget -O "${BASH_SOURCE[0]}" "https://github.com/kirin10000/Xray-script/raw/main/Xray-TLS+Web-setup.sh"; then
-        green "脚本更新完成，请重新运行脚本！"
+        green "The script update is complete, please run the script again!"
         exit 0
     else
-        red "更新脚本失败！"
+        red "update script failed！"
         exit 1
     fi
 }
 ask_update_script()
 {
     if check_script_update; then
-        green "脚本可升级"
-        ask_if "是否升级脚本？(y/n)" && update_script
+        green "Script can be upgraded"
+        ask_if "Whether to upgrade the script？(y/n)" && update_script
     else
-        green "脚本已经是最新版本"
+        green "The script is already the latest version"
     fi
 }
 ask_update_script_force()
 {
     if check_script_update; then
-        green "脚本可升级"
-        if ask_if "是否升级脚本？(y/n)"; then
+        green "Script can be upgraded"
+        if ask_if "Whether to upgrade the script？(y/n)"; then
             update_script
         else
-            red "请先更新脚本"
+            red "Please update the script first"
             exit 0
         fi
     else
-        green "脚本已经是最新版本"
+        green "The script is already the latest version"
     fi
 }
 redhat_install()
@@ -241,9 +241,9 @@ test_important_dependence_installed()
             if LANG="en_US.UTF-8" LANGUAGE="en_US:en" apt-mark manual "$1" | grep -qi 'set[ '$'\t]*to[ '$'\t]*manually[ '$'\t]*installed'; then
                 temp_exit_code=0
             else
-                red "安装依赖 \"$1\" 出错！"
-                green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
-                yellow "按回车键继续或者Ctrl+c退出"
+                red "install dependencies \"$1\" go wrong！"
+                green  "Bugs welcome report(https://github.com/kirin10000/Xray-script/issues)，thank you for your support"
+                yellow "Press Enter to continue or Ctrl+c to exit"
                 read -s
             fi
         elif $apt_no_install_recommends -y install "$1"; then
@@ -275,11 +275,11 @@ check_important_dependence_installed()
 {
     if ! test_important_dependence_installed "$@"; then
         if [ $release == "ubuntu" ] || [ $release == "debian" ] || [ $release == "deepin" ] || [ $release == "other-debian" ]; then
-            red "重要组件\"$1\"安装失败！！"
+            red "important components\"$1\"installation failed！！"
         else
-            red "重要组件\"$2\"安装失败！！"
+            red "important components\"$2\"installation failed！！"
         fi
-        yellow "按回车键继续或者Ctrl+c退出"
+        yellow "Press Enter to continue or Ctrl+c to exit"
         read -s
     fi
 }
@@ -291,9 +291,9 @@ install_dependence()
             $apt update
             $apt_no_install_recommends -y -f install
             if ! $apt_no_install_recommends -y install "$@"; then
-                yellow "依赖安装失败！！"
-                green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
-                yellow "按回车键继续或者Ctrl+c退出"
+                yellow "Dependency installation failed！！"
+                green  "Bugs welcome report(https://github.com/kirin10000/Xray-script/issues)，thank you for your support"
+                yellow "Press Enter to continue or Ctrl+c to exit"
                 read -s
             fi
         fi
@@ -301,7 +301,7 @@ install_dependence()
         if ! redhat_install "$@"; then
             yellow "依赖安装失败！！"
             green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
-            yellow "按回车键继续或者Ctrl+c退出"
+            yellow "Press Enter to continue or Ctrl+c to exit"
             read -s
         fi
     fi
@@ -406,16 +406,16 @@ install_epel()
             if $dnf repolist epel | grep -q epel; then
                 return
             fi
-            yellow "epel源安装失败，这可能导致之后的安装失败，也可能没有影响(取决于你的系统的repo包含软件是否丰富)"
+            yellow "The epel source installation failed, which may cause subsequent installation failures, or may have no effect (depending on whether your system's repo contains rich software)"
             echo
-            tyblue "除了安装epel源过程出错，也有可能是因为你使用的系统比较冷门导致安装失败"
-            tyblue "这种情况下可以手动安装epel源，之后重新运行脚本"
+            tyblue "In addition to the error in the installation of the epel source process, it may also be because the system you are using is relatively unpopular and the installation fails"
+            tyblue "In this case, you can manually install the epel source, and then re-run the script"
         else
-            yellow "epel源安装失败！！"
+            yellow "epel source installation failed！！"
         fi
         echo
-        green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
-        yellow "按回车键继续或者Ctrl+c退出"
+        green  "Bugs welcome report(https://github.com/kirin10000/Xray-script/issues)，thank you for your support"
+        yellow "Press Enter to continue or Ctrl+c to exit"
         read -s
     fi
 }
@@ -425,9 +425,9 @@ fedora_install_remi()
         return
     fi
     if ! redhat_install "https://rpms.remirepo.net/fedora/remi-release-$systemVersion.rpm"; then
-        yellow "remi源安装失败！！"
-        green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
-        yellow "按回车键继续或者Ctrl+c退出"
+        yellow "Remi source installation failed！！"
+        green  "Bugs welcome report(https://github.com/kirin10000/Xray-script/issues)，thank you for your support"
+        yellow "Press Enter to continue or Ctrl+c to exit"
         read -s
     fi
 }
@@ -440,8 +440,8 @@ enter_temp_dir()
     mkdir "$temp_dir" || temp_exit_code=1
     cd "$temp_dir" || temp_exit_code=1
     if [ $temp_exit_code -eq 1 ]; then
-        yellow "进入临时目录失败"
-        tyblue "可能是之前运行脚本中断导致，建议先重启系统，再运行脚本"
+        yellow "Failed to enter temp directory"
+        tyblue "It may be caused by the interruption of the previous running script. It is recommended to restart the system before running the script"
         exit 1
     fi
 }
@@ -491,8 +491,8 @@ check_php_update()
 swap_on()
 {
     if [ $using_swap_now -ne 0 ]; then
-        red    "开启swap错误发生"
-        green  "欢迎进行Bug report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
+        red    "Open swap error occurs"
+        green  "Bugs welcome report(https://github.com/kirin10000/Xray-script/issues)，感谢您的支持"
         yellow "按回车键继续或者Ctrl+c退出"
         read -s
     fi
