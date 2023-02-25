@@ -1,25 +1,25 @@
 # Xray-TLS+Web build/management script
 # ترجمه این اسکریپت هنوز به اتمام نرسیده و درحال انجام است
 ## Table of contents
-[1. Scripting Properties](#Scripting Properties)
+[1. Scripting Properties](#Scripting-Properties)
 
 [2. Precautions](#Precautions)
 
-[3. Installation time description](#Installation time description)
+[3. Installation time description](#Installation-time-description)
 
-[4. Script instructions](#Script instructions)
+[4. Script instructions](#Script-instructions)
 
-[5. run screenshot](#run screenshot)
+[5. run screenshot](#run-screenshot)
 
-[6. Fake website description](#Fake website description)
+[6. Fake website description](#Fake-website-description)
 
-[7. About TLS handshake, TLS fingerprint and ALPN](#About tls handshake tls fingerprint and alpn)
+[7. About TLS handshake, TLS fingerprint and ALPN](#About-tls-handshake-tls-fingerprint-and-alpn)
 
-[8. About gRPC and WebSocket](#About gRPC and WebSocket)
+[8. About gRPC and WebSocket](#About-gRPC-and-WebSocket)
 
-[9. installation location](#installation location)
+[9. installation location](#installation-location)
 
-[10. dependency list](#dependency list)
+[10. dependency list](#dependency-list)
 
 [11. Note](#Note)
 ## Scripting Properties
@@ -45,13 +45,13 @@
 ## Precautions
 1. This script requires a domain name that resolves to the server (supports cdn)
 
-2. This script takes a long time to install, see **[Installation time description](#Installation time description)**
+2. This script takes a long time to install, see **[Installation time description](#Installation-time-description)**
 
 3. This script is designed for personal VPS users, not for airport owners (This script does not have functions such as multi-user management/traffic statistics).
 
 4. It is recommended to use this script on a clean system (VPS console - reset system)
 ## Installation time description
-This script takes a long time to install (**[Installation time reference](#Installation time reference)**) ，See[Here](#Why does the script take so long to install)。
+This script takes a long time to install (**[Installation time reference](#Installation-time-reference)**) ，See[Here](#Why-does-the-script-take-so-long-to-install)。
 
 This script is suitable for long-term use after one installation, and is not suitable for repeatedly resetting the system installation, which will consume a lot of your time. If you need to change the configuration and domain name, etc., there are corresponding options in the management interface.
 
@@ -135,7 +135,7 @@ bash Xray-TLS+Web-setup.sh
 
 * **单点性** 指使用的人少，一般只有自己，即使分享给朋友，一般也不会太多。
 * **长时间性** 不单指时间长，也指坚持一个月或一年每天都使用代理。
-* **GO-TLS指纹特性** **在不伪装浏览器指纹的前提下**，从TLS握手信息中可以判断出客户端是GO程序，详见[此处](#About tls handshake tls fingerprint and alpn)。
+* **GO-TLS指纹特性** **在不伪装浏览器指纹的前提下**，从TLS握手信息中可以判断出客户端是GO程序，详见[此处](#About-tls-handshake-tls-fingerprint-and-alpn)。
 * **出入相同性** 指入VPS和出VPS的流量在时间和大小上几乎相同，比如使用Xray代理浏览`BiliBili`，从`BiliBili`到`VPS(Xray服务端)`的流量，和从`VPS`到`Xray客户端`的流量在时间上和大小上是几乎相同的。**出入相同性** 是所有代理的通病，目前还没有太好的伪装方法，但是因为VPS不在大陆，如果不是被特别关注的对象，一般不会被审查。
 
 既然使用Xray进行代理的全部流量都将伪装成访问这个网站的流量，那么我们选择伪装网站就是要尽量选择**流量特征与Xray代理的流量特征相同的网站**。
@@ -146,12 +146,12 @@ bash Xray-TLS+Web-setup.sh
 
 个人网盘与上面所说特征的吻合数最多，包括 **单点性** 、 **大流量性** 、 **GO-TLS指纹特性** 、 **长时间性** 等，建议选择。
 
-关于**GO-TLS指纹特性**，**在不伪装浏览器指纹的前提下**，将alpn设置为http/1.1，可以伪装成GO语言实现的WebDav客户端，详见[此处](#About tls handshake tls fingerprint and alpn)。
+关于**GO-TLS指纹特性**，**在不伪装浏览器指纹的前提下**，将alpn设置为http/1.1，可以伪装成GO语言实现的WebDav客户端，详见[此处](#About-tls-handshake-tls-fingerprint-and-alpn)。
 
 Cloudreve 与 Nextcloud 的区别如下：
 ||优点|缺点|
 |-|-|-|
-|Nextcloud|功能更多更强大，用的人更多|需要安装php，安装php需要额外很多时间(见 **[Installation time reference](#Installation time reference)**)，同时也比Cloudreve占用更多系统资源，因此不建议小机使用。|
+|Nextcloud|功能更多更强大，用的人更多|需要安装php，安装php需要额外很多时间(见 **[Installation time reference](#Installation-time-reference)**)，同时也比Cloudreve占用更多系统资源，因此不建议小机使用。|
 |Cloudreve|轻量化、安装快(不需要php)、占用系统资源少|功能较少，使用的人较少|
 2. **403页面**
 
@@ -181,7 +181,7 @@ Xray默认使用的是GO语言官方提供的TLS库，这也是几乎所有GO语
 ## About gRPC and WebSocket
 当正在使用的CDN同时支持gRPC与WebSocket时，两者之间改如何选择呢？他们的主要区别体现在以下三个方面：ALPN、延迟和性能。
 
-关于ALPN，见[此处](#About tls handshake tls fingerprint and alpn)。
+关于ALPN，见[此处](#About-tls-handshake-tls-fingerprint-and-alpn)。
 
 关于延迟，gRPC自带mux，因此延迟更低。注意这里指的是打开网站的延迟，mux并不能降低游戏延迟。
 
